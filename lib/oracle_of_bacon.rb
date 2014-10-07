@@ -23,7 +23,7 @@ class OracleOfBacon
     errors.add(:from, "from cannot be same as To") if @from == @to
   end
 
-  def initialize(api_key='',from = "Kevin Bacon",to = "Kevin Bacon")
+  def initialize(api_key='38b99ce9ec87',from = "Kevin Bacon",to = "Kevin Bacon")
     @api_key = api_key
     @from    = from
     @to      = to  
