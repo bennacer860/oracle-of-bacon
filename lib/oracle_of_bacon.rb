@@ -31,17 +31,20 @@ class OracleOfBacon
   end
 
   def find_connections
+    raise InvalidError unless self.valid?
     make_uri_from_arguments
     begin
-      xml = URI.parse(uri).read
+      xml = URI.parse(@uri).read
     rescue Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError,
       Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError,
       Net::ProtocolError => e
       # convert all of these into a generic OracleOfBacon::NetworkError,
       #  but keep the original error message
       # your code here
+      raise NetworkError, e.message
     end
     # your code here: create the OracleOfBacon::Response object
+    @response = Response.new(xml)
   end
 
   def make_uri_from_arguments
